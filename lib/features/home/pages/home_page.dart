@@ -29,7 +29,9 @@ class _HomePageState extends State<HomePage> {
       valueListenable: currencyController,
       builder: (context, _, _) {
         final pages = [
-          DashboardPage(),
+          DashboardPage(
+            onAddLancamento: () => setState(() => currentIndex = 1),
+          ),
           LancamentosPage(),
           RelatoriosPage(),
           MetasPage(),
@@ -40,8 +42,10 @@ class _HomePageState extends State<HomePage> {
           body: IndexedStack(index: currentIndex, children: pages),
           bottomNavigationBar: Padding(
             padding: EdgeInsets.fromLTRB(16, 0, 16, 16 + bottomSafeArea),
-            child: DecoratedBox(
+            child: Container(
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
+                color: Colors.white,
                 boxShadow: const [
                   BoxShadow(
                     color: Color(0x140F2418),
@@ -51,51 +55,117 @@ class _HomePageState extends State<HomePage> {
                 ],
                 borderRadius: BorderRadius.circular(28),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(28),
-                child: NavigationBar(
-                  selectedIndex: currentIndex,
-                  backgroundColor: Colors.white,
-                  indicatorColor: context.driveProfitPalette.cardTint,
-                  labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-                  destinations: [
-                    NavigationDestination(
-                      icon: const Icon(Icons.dashboard_outlined),
-                      selectedIcon: const Icon(Icons.dashboard_rounded),
-                      label: tr('Dashboard'),
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.receipt_long_outlined),
-                      selectedIcon: const Icon(Icons.receipt_long_rounded),
-                      label: tr('Lan\u00E7amentos'),
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.bar_chart_outlined),
-                      selectedIcon: const Icon(Icons.bar_chart_rounded),
-                      label: tr('Relat\u00F3rios'),
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.flag_outlined),
-                      selectedIcon: const Icon(Icons.flag_rounded),
-                      label: tr('Metas'),
-                    ),
-                    NavigationDestination(
-                      icon: const Icon(Icons.person_outline_rounded),
-                      selectedIcon: const Icon(Icons.person_rounded),
-                      label: tr('Perfil'),
-                    ),
-                  ],
-                  onDestinationSelected: (index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                ),
+              child: Row(
+                children: [
+                  _BottomNavItem(
+                    label: tr('Dashboard'),
+                    icon: Icons.dashboard_outlined,
+                    selectedIcon: Icons.dashboard_rounded,
+                    selected: currentIndex == 0,
+                    onTap: () => setState(() => currentIndex = 0),
+                  ),
+                  _BottomNavItem(
+                    label: tr('Lan\u00E7amentos'),
+                    icon: Icons.receipt_long_outlined,
+                    selectedIcon: Icons.receipt_long_rounded,
+                    selected: currentIndex == 1,
+                    onTap: () => setState(() => currentIndex = 1),
+                  ),
+                  _BottomNavItem(
+                    label: tr('Relat\u00F3rios'),
+                    icon: Icons.bar_chart_outlined,
+                    selectedIcon: Icons.bar_chart_rounded,
+                    selected: currentIndex == 2,
+                    onTap: () => setState(() => currentIndex = 2),
+                  ),
+                  _BottomNavItem(
+                    label: tr('Metas'),
+                    icon: Icons.flag_outlined,
+                    selectedIcon: Icons.flag_rounded,
+                    selected: currentIndex == 3,
+                    onTap: () => setState(() => currentIndex = 3),
+                  ),
+                  _BottomNavItem(
+                    label: tr('Perfil'),
+                    icon: Icons.person_outline_rounded,
+                    selectedIcon: Icons.person_rounded,
+                    selected: currentIndex == 4,
+                    onTap: () => setState(() => currentIndex = 4),
+                  ),
+                ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class _BottomNavItem extends StatelessWidget {
+  const _BottomNavItem({
+    required this.label,
+    required this.icon,
+    required this.selectedIcon,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final IconData icon;
+  final IconData selectedIcon;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = selected
+        ? DriveProfitTheme.primaryColor
+        : context.driveProfitPalette.subtitle;
+
+    return Expanded(
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          foregroundColor: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
+        ),
+        onPressed: onTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          height: 62,
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 7),
+          decoration: BoxDecoration(
+            color: selected
+                ? context.driveProfitPalette.cardTint
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(selected ? selectedIcon : icon, color: color, size: 22),
+              const SizedBox(height: 4),
+              Listener(
+                behavior: HitTestBehavior.opaque,
+                onPointerUp: (_) => onTap(),
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 11,
+                    fontWeight: selected ? FontWeight.w800 : FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
