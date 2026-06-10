@@ -5,6 +5,7 @@ class AppPreferences {
   AppPreferences._(this._prefs, this._userId);
 
   static const String _migratedUsersKey = '_migrated_legacy_users';
+  static const String _legacyDataOwnerKey = '_legacy_data_owner';
   static const List<String> _legacyUserKeys = [
     'userName',
     'userEmail',
@@ -58,8 +59,11 @@ class AppPreferences {
 
     final hasScopedData = _legacyUserKeys.any(containsKey);
     final hasLegacyData = _legacyUserKeys.any(_prefs.containsKey);
+    final legacyDataOwner = _prefs.getString(_legacyDataOwnerKey);
+    final canClaimLegacyData =
+        legacyDataOwner == null || legacyDataOwner == userId;
 
-    if (!hasScopedData && hasLegacyData) {
+    if (!hasScopedData && hasLegacyData && canClaimLegacyData) {
       for (final key in _legacyUserKeys) {
         if (!_prefs.containsKey(key)) {
           continue;
@@ -81,6 +85,8 @@ class AppPreferences {
           );
         }
       }
+
+      await _prefs.setString(_legacyDataOwnerKey, userId);
     }
 
     await _prefs.setStringList(_migratedUsersKey, [...migratedUsers, userId]);
