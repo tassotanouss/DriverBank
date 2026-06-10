@@ -6,6 +6,7 @@ import '../../../core/utils/currency_scope.dart';
 import '../../../core/utils/form_validators.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../../../core/widgets/summary_card.dart';
@@ -226,7 +227,7 @@ class _MetasPageState extends State<MetasPage> {
             SizedBox(
               width: larguraCard,
               child: SummaryCard(
-                title: 'Meta diÃ¡ria',
+                title: 'Meta diária',
                 value: formatarMoeda(metaDiaria),
                 compact: true,
               ),
@@ -289,6 +290,15 @@ class _MetasPageState extends State<MetasPage> {
                   message: feedbackMessage!,
                   type: feedbackType!,
                 ),
+              DriverBankHeroCard(
+                label: tr('Meta mensal planejada'),
+                value: formatarMoeda(metaMensal),
+                icon: Icons.flag_rounded,
+                description: tr(
+                  'O app calcula automaticamente uma meta diária e semanal a partir do valor base.',
+                ),
+              ),
+              const SizedBox(height: 18),
               FormSectionCard(
                 title: tr('Planejamento de ganhos'),
                 subtitle: tr(
