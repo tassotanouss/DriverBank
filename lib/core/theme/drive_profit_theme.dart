@@ -117,4 +117,145 @@ class DriveProfitTheme {
         style: OutlinedButton.styleFrom(
           minimumSize: const Size.fromHeight(52),
           side: const BorderSide(color: borderColor),
-          shape: RoundedRectangleBorder
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          foregroundColor: titleColor,
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ),
+      cardTheme: CardThemeData(
+        color: cardColor,
+        elevation: 0,
+        margin: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: borderColor),
+        ),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: titleColor,
+        contentTextStyle: const TextStyle(color: Colors.white),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: cardColor,
+        surfaceTintColor: Colors.transparent,
+        height: 82,
+        elevation: 0,
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          final selected = states.contains(WidgetState.selected);
+          return TextStyle(
+            fontSize: 12,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+            color: selected ? primaryColor : subtitleColor,
+          );
+        }),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          final selected = states.contains(WidgetState.selected);
+          return IconThemeData(
+            color: selected ? primaryColor : subtitleColor,
+            size: 23,
+          );
+        }),
+      ),
+      dividerColor: borderColor,
+      extensions: const [DriveProfitPalette()],
+    );
+  }
+
+  static BoxDecoration cardDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: cardColor,
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: borderColor),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x1213261C),
+          blurRadius: 22,
+          offset: Offset(0, 12),
+        ),
+      ],
+    );
+  }
+
+  static BoxDecoration tintedCardDecoration(
+    BuildContext context, {
+    Color? tint,
+  }) {
+    return BoxDecoration(
+      color: tint ?? cardTintColor,
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: borderColor),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x1013261C),
+          blurRadius: 18,
+          offset: Offset(0, 10),
+        ),
+      ],
+    );
+  }
+}
+
+class DriveProfitPalette extends ThemeExtension<DriveProfitPalette> {
+  const DriveProfitPalette({
+    this.profit = DriveProfitTheme.profitColor,
+    this.loss = DriveProfitTheme.lossColor,
+    this.cardTint = DriveProfitTheme.cardTintColor,
+    this.title = DriveProfitTheme.titleColor,
+    this.subtitle = DriveProfitTheme.subtitleColor,
+    this.border = DriveProfitTheme.borderColor,
+  });
+
+  final Color profit;
+  final Color loss;
+  final Color cardTint;
+  final Color title;
+  final Color subtitle;
+  final Color border;
+
+  @override
+  DriveProfitPalette copyWith({
+    Color? profit,
+    Color? loss,
+    Color? cardTint,
+    Color? title,
+    Color? subtitle,
+    Color? border,
+  }) {
+    return DriveProfitPalette(
+      profit: profit ?? this.profit,
+      loss: loss ?? this.loss,
+      cardTint: cardTint ?? this.cardTint,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      border: border ?? this.border,
+    );
+  }
+
+  @override
+  ThemeExtension<DriveProfitPalette> lerp(
+    covariant ThemeExtension<DriveProfitPalette>? other,
+    double t,
+  ) {
+    if (other is! DriveProfitPalette) {
+      return this;
+    }
+
+    return DriveProfitPalette(
+      profit: Color.lerp(profit, other.profit, t) ?? profit,
+      loss: Color.lerp(loss, other.loss, t) ?? loss,
+      cardTint: Color.lerp(cardTint, other.cardTint, t) ?? cardTint,
+      title: Color.lerp(title, other.title, t) ?? title,
+      subtitle: Color.lerp(subtitle, other.subtitle, t) ?? subtitle,
+      border: Color.lerp(border, other.border, t) ?? border,
+    );
+  }
+}
+
+extension DriveProfitThemeContext on BuildContext {
+  DriveProfitPalette get driveProfitPalette =>
+      Theme.of(this).extension<DriveProfitPalette>()!;
+}
