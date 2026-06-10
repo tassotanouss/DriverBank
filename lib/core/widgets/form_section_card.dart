@@ -29,30 +29,21 @@ class FormSectionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (icon != null) ...[
-                Icon(icon, color: context.driveProfitPalette.title),
-                const SizedBox(width: 10),
-              ],
-              Expanded(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleLarge,
+                Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(
+                    color: context.driveProfitPalette.cardTint,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 20,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          if (subtitle != null) ...[
-            const SizedBox(height: 8),
-            Text(
-              subtitle!,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-          const SizedBox(height: 18),
-          child,
-        ],
-      ),
-    );
-  }
-}
+                const SizedBox(width: 10),
+             
