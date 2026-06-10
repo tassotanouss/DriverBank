@@ -7,6 +7,7 @@ import '../../../core/localization/app_localizations.dart';
 import '../../../core/theme/drive_profit_theme.dart';
 import '../../../core/utils/app_preferences.dart';
 import '../../../core/utils/currency_scope.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../models/lancamento_model.dart';
 
 class RelatoriosPage extends StatefulWidget {
@@ -446,9 +447,15 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
         child: ListView(
           padding: const EdgeInsets.all(18),
           children: [
-            Text(
-              tr('Acompanhe seu desempenho'),
-              style: Theme.of(context).textTheme.bodyMedium,
+            DriverBankHeroCard(
+              label: tr('Lucro líquido do período'),
+              value: formatarMoeda(lucroLiquido),
+              icon: lucroLiquido >= 0
+                  ? Icons.trending_up_rounded
+                  : Icons.trending_down_rounded,
+              description: tr(
+                'Acompanhe faturamento, despesas, horas e quilometragem com filtros por dia, semana ou mês.',
+              ),
             ),
             const SizedBox(height: 18),
             Row(
