@@ -8,6 +8,7 @@ import '../../../core/utils/currency_scope.dart';
 import '../../../core/utils/form_validators.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../../../core/widgets/language_selector_field.dart';
@@ -162,113 +163,12 @@ class _LoginPageState extends State<LoginPage> {
                   message: feedbackMessage!,
                   type: feedbackType!,
                 ),
-              FormSectionCard(
-                title: tr('Idioma do aplicativo'),
-                subtitle: tr('Você pode trocar o idioma antes de entrar.'),
-                icon: Icons.language_outlined,
-                child: const LanguageSelectorField(),
-              ),
-              FormSectionCard(
-                title: tr('Acesse sua conta'),
-                subtitle: tr(
-                  'Use seu e-mail e sua senha cadastrados para continuar.',
-                ),
-                icon: Icons.login_outlined,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppTextField(
-                      label: tr('E-mail de acesso'),
-                      controller: emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      hint: tr('nome@exemplo.com'),
-                      helperText: tr('Digite o e-mail usado no cadastro.'),
-                      isFormField: true,
-                      autovalidateMode: tentouEnviar
-                          ? AutovalidateMode.onUserInteraction
-                          : AutovalidateMode.disabled,
-                      validator: (value) =>
-                          FormValidators.validateEmail(value, translate: tr),
-                    ),
-                    AppTextField(
-                      label: tr('Senha'),
-                      controller: senhaController,
-                      obscureText: ocultarSenha,
-                      hint: tr('Sua senha de acesso'),
-                      autovalidateMode: tentouEnviar
-                          ? AutovalidateMode.onUserInteraction
-                          : AutovalidateMode.disabled,
-                      isFormField: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return tr('Informe sua senha para entrar.');
-                        }
-                        return null;
-                      },
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            ocultarSenha = !ocultarSenha;
-                          });
-                        },
-                        icon: Icon(
-                          ocultarSenha
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    AppButton(
-                      label: enviando
-                          ? tr('Entrando...')
-                          : tr('Entrar no aplicativo'),
-                      onPressed: enviando ? null : entrar,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: enviando
-                            ? null
-                            : () {
-                                final normalizedEmail =
-                                    FormValidators.normalizeEmail(
-                                      emailController.text,
-                                    );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => ForgotPasswordPage(
-                                      initialEmail: normalizedEmail,
-                                    ),
-                                  ),
-                                );
-                              },
-                        child: Text(tr('Esqueci minha senha')),
-                      ),
-                    ),
-                  ],
+              DriverBankHeroCard(
+                label: tr('Bem-vindo de volta'),
+                value: 'DriveProfit',
+                icon: Icons.local_taxi_rounded,
+                description: tr(
+                  'Entre para acompanhar faturamento, custos e lucro real da sua rotina.',
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(tr('Ainda não tem conta?')),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (_) => const SignupPage()),
-                      );
-                    },
-                    child: Text(tr('Criar conta')),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+            
