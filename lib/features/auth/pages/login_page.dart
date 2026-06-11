@@ -8,6 +8,7 @@ import '../../../core/utils/currency_scope.dart';
 import '../../../core/utils/form_validators.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../../../core/widgets/language_selector_field.dart';
@@ -162,6 +163,15 @@ class _LoginPageState extends State<LoginPage> {
                   message: feedbackMessage!,
                   type: feedbackType!,
                 ),
+              DriverBankHeroCard(
+                label: tr('Bem-vindo de volta'),
+                value: 'DriveProfit',
+                icon: Icons.local_taxi_rounded,
+                description: tr(
+                  'Entre para acompanhar faturamento, custos e lucro real da sua rotina.',
+                ),
+              ),
+              const SizedBox(height: 18),
               FormSectionCard(
                 title: tr('Idioma do aplicativo'),
                 subtitle: tr('Você pode trocar o idioma antes de entrar.'),

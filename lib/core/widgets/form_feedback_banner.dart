@@ -59,9 +59,9 @@ class FormFeedbackBanner extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: iconColor,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleMedium?.copyWith(color: iconColor),
                 ),
                 const SizedBox(height: 4),
                 Text(

@@ -9,6 +9,7 @@ import '../../../core/utils/custos_fixos_helper.dart';
 import '../../../core/utils/form_validators.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../../../core/widgets/language_selector_field.dart';
@@ -58,39 +59,49 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> carregarPerfil() async {
-    final prefs = await AppPreferences.load();
-    final total = CustosFixosHelper.obterTotalMensalDosPrefs(prefs);
-    final hoje = DateTime.now();
-    final custoDiarioCalculado = CustosFixosHelper.obterCustoDiario(
-      hoje,
-      total,
-    );
-    final currentUser = _authService.currentUserOrNull;
-    final dataInicioSalva = prefs.getString('userStartDate');
-
-    if (dataInicioSalva == null || dataInicioSalva.trim().isEmpty) {
-      await prefs.setString(
-        'userStartDate',
-        DateFormat('yyyy-MM-dd').format(DateTime.now()),
+    try {
+      final prefs = await AppPreferences.load();
+      final total = CustosFixosHelper.obterTotalMensalDosPrefs(prefs);
+      final hoje = DateTime.now();
+      final custoDiarioCalculado = CustosFixosHelper.obterCustoDiario(
+        hoje,
+        total,
       );
-    }
+      final currentUser = _authService.currentUserOrNull;
+      final dataInicioSalva = prefs.getString('userStartDate');
 
-    if (!mounted) {
-      return;
-    }
+      if (dataInicioSalva == null || dataInicioSalva.trim().isEmpty) {
+        await prefs.setString(
+          'userStartDate',
+          DateFormat('yyyy-MM-dd').format(DateTime.now()),
+        );
+      }
 
-    setState(() {
-      nomeController.text =
-          prefs.getString('userName') ?? currentUser?.displayName ?? '';
-      emailController.text =
-          currentUser?.email ?? prefs.getString('userEmail') ?? '';
-      celularController.text = prefs.getString('userPhone') ?? '';
-      moedaSelecionada = prefs.getString('userCurrency') ?? 'BRL';
-      dataInicioUso = prefs.getString('userStartDate') ?? '';
-      totalCustosFixos = total;
-      custoFixoDiario = custoDiarioCalculado;
-      carregando = false;
-    });
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        nomeController.text =
+            prefs.getString('userName') ?? currentUser?.displayName ?? '';
+        emailController.text =
+            currentUser?.email ?? prefs.getString('userEmail') ?? '';
+        celularController.text = prefs.getString('userPhone') ?? '';
+        moedaSelecionada = prefs.getString('userCurrency') ?? 'BRL';
+        dataInicioUso = prefs.getString('userStartDate') ?? '';
+        totalCustosFixos = total;
+        custoFixoDiario = custoDiarioCalculado;
+        carregando = false;
+      });
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        carregando = false;
+      });
+    }
   }
 
   Future<void> salvarPerfil() async {
@@ -255,8 +266,60 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
       ),
       body: ListView(
+        cacheExtent: 1000,
         padding: const EdgeInsets.all(18),
         children: [
+          DriverBankHeroCard(
+            label: tr('Perfil do motorista'),
+            value: displayName,
+            icon: Icons.person_rounded,
+            description: tr(
+              'Organize seus dados, idioma, moeda e custos principais em um só lugar.',
+            ),
+          ),
+          const SizedBox(height: 18),
+          FormSectionCard(
+            title: tr('Moeda do aplicativo'),
+            subtitle: tr(
+              'Escolha como os valores financeiros devem aparecer nas telas.',
+            ),
+            icon: Icons.payments_outlined,
+            child: Column(
+              children: [
+                DropdownButtonFormField<String>(
+                  initialValue: moedaSelecionada,
+                  decoration: InputDecoration(
+                    labelText: tr('Moeda'),
+                    helperText: tr(
+                      'Define a preferência monetária salva para o perfil.',
+                    ),
+                  ),
+                  items: CurrencyController.supportedCurrencies
+                      .map(
+                        (option) => DropdownMenuItem(
+                          value: option.code,
+                          child: Text('${tr(option.label)} (${option.symbol})'),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      moedaSelecionada = value;
+                    });
+                  },
+                ),
+                const SizedBox(height: 10),
+                AppButton(
+                  label: tr('Salvar configurações'),
+                  onPressed: salvarPerfil,
+                  icon: Icons.save_outlined,
+                ),
+              ],
+            ),
+          ),
           Container(
             padding: const EdgeInsets.all(20),
             decoration: DriveProfitTheme.tintedCardDecoration(context),

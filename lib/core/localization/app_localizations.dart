@@ -64,6 +64,33 @@ class AppLocalizations {
 
   static const Map<String, Map<String, String>> _translations = {
     'en': {
+      'Custo fixo mensal': 'Monthly fixed cost',
+      'Equivale a {value} por dia neste mês, mesmo em dias sem trabalho.':
+          'Equals {value} per day this month, even on days without work.',
+      'Bem-vindo de volta': 'Welcome back',
+      'Entre para acompanhar faturamento, custos e lucro real da sua rotina.':
+          'Sign in to track revenue, costs, and real profit from your routine.',
+      'Novo cadastro': 'New account',
+      'Configure seu acesso para controlar faturamento, metas e custos do veículo.':
+          'Set up your access to manage revenue, goals, and vehicle costs.',
+      'Recuperar acesso': 'Recover access',
+      'Receba um link seguro para voltar a acessar seus dados financeiros.':
+          'Receive a secure link to access your financial data again.',
+      'Lucro real de hoje': 'Real profit today',
+      'Adicionar lançamento do dia': 'Add today\'s entry',
+      'Lucro calculado do dia': 'Calculated profit for the day',
+      'Prejuízo calculado do dia': 'Calculated loss for the day',
+      'Resultado atualizado com faturamento, combustível, extras e custo fixo aplicado.':
+          'Updated result with revenue, fuel, extras, and applied fixed cost.',
+      'Lucro líquido do período': 'Net profit for the period',
+      'Acompanhe faturamento, despesas, horas e quilometragem com filtros por dia, semana ou mês.':
+          'Track revenue, expenses, hours, and mileage with filters by day, week, or month.',
+      'Meta mensal planejada': 'Planned monthly goal',
+      'O app calcula automaticamente uma meta diária e semanal a partir do valor base.':
+          'The app automatically calculates daily and weekly goals from the base amount.',
+      'Perfil do motorista': 'Driver profile',
+      'Organize seus dados, idioma, moeda e custos principais em um só lugar.':
+          'Organize your details, language, currency, and main costs in one place.',
       'Idioma do aplicativo': 'App language',
       'Escolha o idioma usado em todas as telas do app.':
           'Choose the language used across the app.',
@@ -172,8 +199,7 @@ class AppLocalizations {
       'O app continua com a configuração detalhada na tela própria, mas você consegue acompanhar o resumo daqui.':
           'The app keeps the detailed setup on its own screen, but you can follow the summary from here.',
       'Total mensal: {value}': 'Monthly total: {value}',
-      'Custo diário estimado: {value}':
-          'Estimated daily cost: {value}',
+      'Custo diário estimado: {value}': 'Estimated daily cost: {value}',
       'Editar custos fixos': 'Edit fixed costs',
       'Sair da conta': 'Sign out',
       'Encerrar a sessão neste aparelho.': 'End the session on this device.',
@@ -196,8 +222,7 @@ class AppLocalizations {
           'Use a value greater than or equal to zero.',
       'Preencha este campo.': 'Fill in this field.',
       'Digite um número inteiro válido.': 'Enter a valid whole number.',
-      'Informe quanto tempo você trabalhou.':
-          'Enter how long you worked.',
+      'Informe quanto tempo você trabalhou.': 'Enter how long you worked.',
       'Use um horário válido no formato hh:mm.':
           'Use a valid time in hh:mm format.',
       'Meta: {value}': 'Goal: {value}',
@@ -292,8 +317,7 @@ class AppLocalizations {
       'Custos fixos atualizados com sucesso.':
           'Fixed costs updated successfully.',
       'Custos fixos salvos com sucesso.': 'Fixed costs saved successfully.',
-      'Informe um valor para este campo.':
-          'Enter a value for this field.',
+      'Informe um valor para este campo.': 'Enter a value for this field.',
       'Veja quanto seus custos recorrentes representam no mês e no dia.':
           'See how much your recurring costs represent in the month and per day.',
       'TOTAL MENSAL': 'MONTHLY TOTAL',
@@ -308,8 +332,7 @@ class AppLocalizations {
           'Include vehicle financing or leasing here.',
       'Seguro do veículo': 'Vehicle insurance',
       'Ex.: 320,00': 'E.g.: 320.00',
-      'Valor médio mensal do seguro.':
-          'Average monthly insurance value.',
+      'Valor médio mensal do seguro.': 'Average monthly insurance value.',
       'IPVA provisionado': 'Reserved vehicle tax',
       'Ex.: 180,00': 'E.g.: 180.00',
       'Use o valor mensal reservado para o imposto.':
@@ -338,10 +361,8 @@ class AppLocalizations {
           'Today\'s result was saved. Applied fixed cost: {value}.',
       'Lançamento de {date} atualizado com sucesso.':
           'Entry for {date} updated successfully.',
-      'KM inicial salvo com sucesso.':
-          'Starting odometer saved successfully.',
-      'Lançamento atualizado com sucesso.':
-          'Entry updated successfully.',
+      'KM inicial salvo com sucesso.': 'Starting odometer saved successfully.',
+      'Lançamento atualizado com sucesso.': 'Entry updated successfully.',
       'Lançamento salvo com sucesso.': 'Entry saved successfully.',
       'Excluir lançamento': 'Delete entry',
       'Deseja excluir o lançamento de {date}? Essa ação não poderá ser desfeita.':
@@ -375,8 +396,7 @@ class AppLocalizations {
           'Partial record saved with the starting odometer.',
       'Faturamento: {value}': 'Revenue: {value}',
       'KM rodado: {value} km': 'Kilometers driven: {value} km',
-      'Odômetro: {start} até {end}':
-          'Odometer: {start} to {end}',
+      'Odômetro: {start} até {end}': 'Odometer: {start} to {end}',
       'Corridas: {value}': 'Trips: {value}',
       'Horas trabalhadas: {value}': 'Hours worked: {value}',
       'Combustível: {value}': 'Fuel: {value}',
@@ -440,6 +460,33 @@ class AppLocalizations {
       'Nenhum lançamento salvo ainda.': 'No entries saved yet.',
     },
     'es': {
+      'Custo fixo mensal': 'Costo fijo mensual',
+      'Equivale a {value} por dia neste mês, mesmo em dias sem trabalho.':
+          'Equivale a {value} por día este mes, incluso en días sin trabajo.',
+      'Bem-vindo de volta': 'Bienvenido de nuevo',
+      'Entre para acompanhar faturamento, custos e lucro real da sua rotina.':
+          'Inicia sesión para seguir ingresos, costos y ganancia real de tu rutina.',
+      'Novo cadastro': 'Nuevo registro',
+      'Configure seu acesso para controlar faturamento, metas e custos do veículo.':
+          'Configura tu acceso para controlar ingresos, metas y costos del vehículo.',
+      'Recuperar acesso': 'Recuperar acceso',
+      'Receba um link seguro para voltar a acessar seus dados financeiros.':
+          'Recibe un enlace seguro para volver a acceder a tus datos financieros.',
+      'Lucro real de hoje': 'Ganancia real de hoy',
+      'Adicionar lançamento do dia': 'Agregar registro del día',
+      'Lucro calculado do dia': 'Ganancia calculada del día',
+      'Prejuízo calculado do dia': 'Pérdida calculada del día',
+      'Resultado atualizado com faturamento, combustível, extras e custo fixo aplicado.':
+          'Resultado actualizado con ingresos, combustible, extras y costo fijo aplicado.',
+      'Lucro líquido do período': 'Ganancia neta del período',
+      'Acompanhe faturamento, despesas, horas e quilometragem com filtros por dia, semana ou mês.':
+          'Sigue ingresos, gastos, horas y kilometraje con filtros por día, semana o mes.',
+      'Meta mensal planejada': 'Meta mensual planificada',
+      'O app calcula automaticamente uma meta diária e semanal a partir do valor base.':
+          'La app calcula automáticamente una meta diaria y semanal a partir del valor base.',
+      'Perfil do motorista': 'Perfil del conductor',
+      'Organize seus dados, idioma, moeda e custos principais em um só lugar.':
+          'Organiza tus datos, idioma, moneda y costos principales en un solo lugar.',
       'Idioma do aplicativo': 'Idioma de la app',
       'Escolha o idioma usado em todas as telas do app.':
           'Elige el idioma usado en todas las pantallas de la app.',
@@ -548,37 +595,30 @@ class AppLocalizations {
       'O app continua com a configuração detalhada na tela própria, mas você consegue acompanhar o resumo daqui.':
           'La app mantiene la configuración detallada en su propia pantalla, pero puedes seguir el resumen desde aquí.',
       'Total mensal: {value}': 'Total mensual: {value}',
-      'Custo diário estimado: {value}':
-          'Costo diario estimado: {value}',
+      'Custo diário estimado: {value}': 'Costo diario estimado: {value}',
       'Editar custos fixos': 'Editar costos fijos',
       'Sair da conta': 'Cerrar sesión',
       'Encerrar a sessão neste aparelho.':
           'Cerrar la sesión en este dispositivo.',
-      'Informe um e-mail para continuar.':
-          'Ingresa un correo para continuar.',
+      'Informe um e-mail para continuar.': 'Ingresa un correo para continuar.',
       'Digite um e-mail válido.': 'Ingresa un correo válido.',
       'Crie uma senha para proteger sua conta.':
           'Crea una contraseña para proteger tu cuenta.',
-      'Use pelo menos 8 caracteres.':
-          'Usa al menos 8 caracteres.',
+      'Use pelo menos 8 caracteres.': 'Usa al menos 8 caracteres.',
       'Inclua ao menos uma letra maiúscula.':
           'Incluye al menos una letra mayúscula.',
       'Inclua ao menos uma letra minúscula.':
           'Incluye al menos una letra minúscula.',
-      'Inclua ao menos um número.':
-          'Incluye al menos un número.',
+      'Inclua ao menos um número.': 'Incluye al menos un número.',
       'Inclua ao menos um caractere especial.':
           'Incluye al menos un carácter especial.',
-      'Não use espaços na senha.':
-          'No uses espacios en la contraseña.',
-      'Informe um valor para continuar.':
-          'Ingresa un valor para continuar.',
+      'Não use espaços na senha.': 'No uses espacios en la contraseña.',
+      'Informe um valor para continuar.': 'Ingresa un valor para continuar.',
       'Digite um número válido.': 'Ingresa un número válido.',
       'Use um valor igual ou maior que zero.':
           'Usa un valor igual o mayor que cero.',
       'Preencha este campo.': 'Completa este campo.',
-      'Digite um número inteiro válido.':
-          'Ingresa un número entero válido.',
+      'Digite um número inteiro válido.': 'Ingresa un número entero válido.',
       'Informe quanto tempo você trabalhou.':
           'Informa cuánto tiempo trabajaste.',
       'Use um horário válido no formato hh:mm.':
@@ -590,8 +630,7 @@ class AppLocalizations {
       'Meta batida': 'Meta alcanzada',
       'Meta ainda não atingida': 'Meta aún no alcanzada',
       'Custos fixos restantes no mês': 'Costos fijos restantes del mes',
-      '{covered} de {total} já cobertos':
-          '{covered} de {total} ya cubiertos',
+      '{covered} de {total} já cobertos': '{covered} de {total} ya cubiertos',
       'Média diária necessária neste mês: {value}':
           'Promedio diario necesario este mes: {value}',
       'Ainda não há lançamentos suficientes para mostrar o gráfico.':
@@ -675,8 +714,7 @@ class AppLocalizations {
       'Custos fixos atualizados com sucesso.':
           'Costos fijos actualizados con éxito.',
       'Custos fixos salvos com sucesso.': 'Costos fijos guardados con éxito.',
-      'Informe um valor para este campo.':
-          'Ingresa un valor para este campo.',
+      'Informe um valor para este campo.': 'Ingresa un valor para este campo.',
       'Veja quanto seus custos recorrentes representam no mês e no dia.':
           'Mira cuánto representan tus costos recurrentes en el mes y en el día.',
       'TOTAL MENSAL': 'TOTAL MENSUAL',
@@ -691,8 +729,7 @@ class AppLocalizations {
           'Incluye aquí financiaciones o leasing del vehículo.',
       'Seguro do veículo': 'Seguro del vehículo',
       'Ex.: 320,00': 'Ej.: 320,00',
-      'Valor médio mensal do seguro.':
-          'Valor promedio mensual del seguro.',
+      'Valor médio mensal do seguro.': 'Valor promedio mensual del seguro.',
       'IPVA provisionado': 'IPVA provisionado',
       'Ex.: 180,00': 'Ej.: 180,00',
       'Use o valor mensal reservado para o imposto.':
@@ -722,8 +759,7 @@ class AppLocalizations {
       'Lançamento de {date} atualizado com sucesso.':
           'Registro de {date} actualizado con éxito.',
       'KM inicial salvo com sucesso.': 'KM inicial guardado con éxito.',
-      'Lançamento atualizado com sucesso.':
-          'Registro actualizado con éxito.',
+      'Lançamento atualizado com sucesso.': 'Registro actualizado con éxito.',
       'Lançamento salvo com sucesso.': 'Registro guardado con éxito.',
       'Excluir lançamento': 'Eliminar registro',
       'Deseja excluir o lançamento de {date}? Essa ação não poderá ser desfeita.':
@@ -757,8 +793,7 @@ class AppLocalizations {
           'Registro parcial guardado con el KM inicial.',
       'Faturamento: {value}': 'Facturación: {value}',
       'KM rodado: {value} km': 'KM recorridos: {value} km',
-      'Odômetro: {start} até {end}':
-          'Odómetro: {start} hasta {end}',
+      'Odômetro: {start} até {end}': 'Odómetro: {start} hasta {end}',
       'Corridas: {value}': 'Viajes: {value}',
       'Horas trabalhadas: {value}': 'Horas trabajadas: {value}',
       'Combustível: {value}': 'Combustible: {value}',
@@ -772,8 +807,7 @@ class AppLocalizations {
           'Estás editando el registro de {date}. Revisa los campos de KM antes de guardar, porque los registros antiguos no guardaban el odómetro inicial y final.',
       'Modo de edição': 'Modo de edición',
       'Editar': 'Editar',
-      'Salvar alterações de {date}':
-          'Guardar cambios de {date}',
+      'Salvar alterações de {date}': 'Guardar cambios de {date}',
       'Atualizar lançamento de hoje': 'Actualizar registro de hoy',
       'Salvar lançamento de hoje': 'Guardar registro de hoy',
       'Editar lançamento': 'Editar registro',
@@ -794,8 +828,7 @@ class AppLocalizations {
           'Puedes guardar solo este campo al inicio del día y completar el resto después.',
       'KM final do veículo': 'KM final del vehículo',
       'Ex.: 45.120': 'Ej.: 45.120',
-      'Odômetro ao encerrar o dia.':
-          'Odómetro al finalizar el día.',
+      'Odômetro ao encerrar o dia.': 'Odómetro al finalizar el día.',
       'Quantidade de corridas': 'Cantidad de viajes',
       'Ex.: 15': 'Ej.: 15',
       'Informe o total de viagens concluídas no dia.':
@@ -821,13 +854,13 @@ class AppLocalizations {
       'Histórico de lançamentos': 'Historial de registros',
       'Consulte os dias anteriores, edite registros antigos e exclua o que não fizer mais sentido.':
           'Consulta los días anteriores, edita registros antiguos y elimina lo que ya no tenga sentido.',
-      'Nenhum lançamento salvo ainda.':
-          'Todavía no hay registros guardados.',
+      'Nenhum lançamento salvo ainda.': 'Todavía no hay registros guardados.',
     },
   };
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override

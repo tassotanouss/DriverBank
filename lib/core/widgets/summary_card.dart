@@ -24,31 +24,29 @@ class SummaryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final card = Container(
       width: expanded ? null : double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: expanded ? 4 : 0).copyWith(
-        bottom: expanded ? 0 : 12,
-      ),
+      margin: EdgeInsets.symmetric(
+        horizontal: expanded ? 4 : 0,
+      ).copyWith(bottom: expanded ? 0 : 12),
       padding: EdgeInsets.all(compact ? 14 : 16),
       decoration: compact
           ? DriveProfitTheme.cardDecoration(context)
           : DriveProfitTheme.tintedCardDecoration(context),
       child: icon == null
           ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   value,
-                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontSize: compact ? 18 : 22,
+                    fontWeight: FontWeight.w900,
                     color: valueColor,
                   ),
                 ),

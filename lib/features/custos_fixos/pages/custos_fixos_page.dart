@@ -7,6 +7,7 @@ import '../../../core/utils/custos_fixos_helper.dart';
 import '../../../core/utils/form_validators.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../../../core/widgets/summary_card.dart';
@@ -238,6 +239,16 @@ class _CustosFixosPageState extends State<CustosFixosPage> {
                   message: feedbackMessage!,
                   type: feedbackType!,
                 ),
+              DriverBankHeroCard(
+                label: tr('Custo fixo mensal'),
+                value: formatarMoeda(totalMensal),
+                icon: Icons.account_balance_wallet_outlined,
+                description: tr(
+                  'Equivale a {value} por dia neste mês, mesmo em dias sem trabalho.',
+                  params: {'value': formatarMoeda(custoDiario)},
+                ),
+              ),
+              const SizedBox(height: 18),
               FormSectionCard(
                 title: tr('Resumo mensal'),
                 subtitle: tr(

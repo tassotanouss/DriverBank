@@ -5,6 +5,7 @@ import '../../../core/localization/app_localizations.dart';
 import '../../../core/utils/form_validators.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../services/auth_service.dart';
@@ -132,6 +133,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   message: feedbackMessage!,
                   type: feedbackType!,
                 ),
+              DriverBankHeroCard(
+                label: tr('Recuperar acesso'),
+                value: tr('Senha'),
+                icon: Icons.lock_reset_rounded,
+                description: tr(
+                  'Receba um link seguro para voltar a acessar seus dados financeiros.',
+                ),
+              ),
+              const SizedBox(height: 18),
               FormSectionCard(
                 title: tr('Recuperação de acesso'),
                 subtitle: tr(

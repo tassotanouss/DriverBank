@@ -8,10 +8,13 @@ import '../../../core/utils/custos_fixos_helper.dart';
 import '../../../core/theme/drive_profit_theme.dart';
 import '../../../core/utils/app_preferences.dart';
 import '../../../core/utils/currency_scope.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../models/lancamento_model.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  const DashboardPage({super.key, this.onAddLancamento});
+
+  final VoidCallback? onAddLancamento;
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -373,25 +376,33 @@ class _DashboardPageState extends State<DashboardPage> {
   }) {
     return Expanded(
       child: Container(
-        height: 110,
+        constraints: const BoxConstraints(minHeight: 132),
         margin: const EdgeInsets.symmetric(horizontal: 4),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(12),
         decoration: DriveProfitTheme.cardDecoration(context),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icone, size: 26),
+            Icon(icone, size: 24),
             const SizedBox(height: 8),
             Text(
               titulo,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 11, height: 1.15),
             ),
             const SizedBox(height: 6),
-            Text(
-              valor,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                valor,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
@@ -550,9 +561,22 @@ class _DashboardPageState extends State<DashboardPage> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            Text(
-              dataHojeFormatada,
-              style: Theme.of(context).textTheme.titleLarge,
+            DriverBankHeroCard(
+              label: tr('Lucro real de hoje'),
+              value: formatarMoeda(lucroHoje),
+              icon: lucroHoje >= 0
+                  ? Icons.trending_up_rounded
+                  : Icons.trending_down_rounded,
+              description: dataHojeFormatada,
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: widget.onAddLancamento,
+                icon: const Icon(Icons.add_rounded),
+                label: Text(tr('Adicionar lançamento do dia')),
+              ),
             ),
             const SizedBox(height: 20),
             Text(tr('Custo fixo diário'), style: TextStyle(fontSize: 16)),
@@ -677,27 +701,36 @@ class InfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 95,
+        constraints: const BoxConstraints(minHeight: 112),
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: DriveProfitTheme.cardDecoration(context),
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(14),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 12),
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: context.driveProfitPalette.cardTint,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  Icons.insights_outlined,
+                  size: 19,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 10),
+              Text(title, style: Theme.of(context).textTheme.bodyMedium),
+              const SizedBox(height: 5),
               Text(
                 value,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.copyWith(fontSize: 20),
               ),
             ],
           ),

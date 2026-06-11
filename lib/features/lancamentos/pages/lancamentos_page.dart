@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/localization/app_localizations.dart';
@@ -9,9 +10,33 @@ import '../../../core/utils/app_preferences.dart';
 import '../../../core/utils/currency_scope.dart';
 import '../../../core/utils/custos_fixos_helper.dart';
 import '../../../core/utils/form_validators.dart';
+import '../../../core/widgets/driverbank_visuals.dart';
 import '../../../core/widgets/form_feedback_banner.dart';
 import '../../../core/widgets/form_section_card.dart';
 import '../../../models/lancamento_model.dart';
+
+class _DurationInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    final digits = newValue.text.replaceAll(RegExp(r'\D'), '');
+    final truncated = digits.length > 4 ? digits.substring(0, 4) : digits;
+
+    final formatted = switch (truncated.length) {
+      0 => '',
+      1 || 2 => truncated,
+      3 => '${truncated[0]}:${truncated.substring(1)}',
+      _ => '${truncated.substring(0, 2)}:${truncated.substring(2)}',
+    };
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
+  }
+}
 
 class LancamentosPage extends StatefulWidget {
   const LancamentosPage({super.key});
@@ -624,12 +649,14 @@ class _LancamentosPageState extends State<LancamentosPage> {
     ),
     String? prefixText,
     String? helperText,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 14),
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
         validator: validator,
         autovalidateMode: tentouSalvar
             ? AutovalidateMode.onUserInteraction
@@ -655,10 +682,22 @@ class _LancamentosPageState extends State<LancamentosPage> {
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
-      decoration: DriveProfitTheme.tintedCardDecoration(context),
+      decoration: DriveProfitTheme.cardDecoration(context),
       child: Row(
         children: [
-          Icon(icone, size: 28),
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: context.driveProfitPalette.cardTint,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              icone,
+              size: 22,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -873,6 +912,19 @@ class _LancamentosPageState extends State<LancamentosPage> {
                   message: feedbackMessage!,
                   type: feedbackType!,
                 ),
+              DriverBankHeroCard(
+                label: lucroPositivo
+                    ? tr('Lucro calculado do dia')
+                    : tr('Prejuízo calculado do dia'),
+                value: formatarMoeda(lucro),
+                icon: lucroPositivo
+                    ? Icons.trending_up_rounded
+                    : Icons.trending_down_rounded,
+                description: tr(
+                  'Resultado atualizado com faturamento, combustível, extras e custo fixo aplicado.',
+                ),
+              ),
+              const SizedBox(height: 18),
               FormSectionCard(
                 title: tituloSecaoFormulario,
                 subtitle: subtituloFormulario,
@@ -955,8 +1007,14 @@ class _LancamentosPageState extends State<LancamentosPage> {
                       hint: tr('Ex.: 08:30'),
                       controller: horasController,
                       icon: Icons.schedule_outlined,
-                      keyboardType: TextInputType.datetime,
-                      helperText: tr('Use o formato hh:mm.'),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        _DurationInputFormatter(),
+                      ],
+                      helperText: tr(
+                        'Digite apenas números. Ex.: 0830 vira 08:30.',
+                      ),
                       validator: validarHoras,
                     ),
                     campoTexto(
